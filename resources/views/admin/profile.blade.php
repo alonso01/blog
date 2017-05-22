@@ -70,7 +70,7 @@
 			<div class="list-group-item">
 				<p>{{ $latest_comment->body }}</p>
 				<p>On {{ $latest_comment->created_at->format('M d,Y \a\t h:i a') }}</p>
-				<p>On post <a href="{{ url('/'.$latest_comment->post->slug) }}">{{ $latest_comment->post->title }}</a></p>
+				<p>On post <a href="{{ url('/'.$latest_comment->post->slug) }}">{{    $latest_comment->post->title }}</a></p>
 			</div>
 		@endforeach
 		@else
@@ -80,4 +80,41 @@
 		@endif
 	</div>
 </div>
+
+@if($is_admin )
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Casas Farmaceuticas</h3>
+    </div>
+    <div class="list-group">
+        
+        <div class="row">
+
+            <div class="col-md-4 text-center">
+
+                <h1 class="m-0">{{ $asofarma_count }}</h1>
+                <span class="text-muted">Asofarma</span>
+
+            </div>
+
+            <div class="col-md-4 text-center">
+
+                <h1 class="m-0">{{ $rowe_count }}</h1>
+                <span class="text-muted">Rowe</span>
+
+            </div>
+
+            <div class="col-md-4 text-center">
+
+                <h1 class="m-0">{{ $denkpharma_count }}</h1>
+                <span class="text-muted">Denk Pharma</span>
+
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+@endif
+
 @endsection

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Blog Demo | Find All Together</title>
+		<title>Biblioteca | Con Mi Doctor</title>
 
 		<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
@@ -28,23 +28,23 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="http://www.findalltogether.com">Find All Together</a>
+					<a class="navbar-brand" href="http://www.conmidoctor.com" target="_blank">Con Mi Doctor</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="{{ url('/') }}">Home</a>
+							<a href="{{ url('/') }}">Inicio</a>
 						</li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
 						<li>
-							<a href="{{ url('/auth/login') }}">Login</a>
+							<a href="{{ url('/auth/login') }}">Ingresar</a>
 						</li>
 						<li>
-							<a href="{{ url('/auth/register') }}">Register</a>
+							<a href="{{ url('/auth/register') }}">Registro</a>
 						</li>
 						@else
 						<li class="dropdown">
@@ -52,17 +52,17 @@
 							<ul class="dropdown-menu" role="menu">
 								@if (Auth::user()->can_post())
 								<li>
-									<a href="{{ url('/new-post') }}">Add new post</a>
+									<a href="{{ url('/new-post') }}">Agregar Entrada</a>
 								</li>
 								<li>
-									<a href="{{ url('/user/'.Auth::id().'/posts') }}">My Posts</a>
+									<a href="{{ url('/user/'.Auth::id().'/posts') }}">Informaci&oacute;n</a>
 								</li>
 								@endif
 								<li>
-									<a href="{{ url('/user/'.Auth::id()) }}">My Profile</a>
+									<a href="{{ url('/user/'.Auth::id()) }}">Mi Perfil</a>
 								</li>
 								<li>
-									<a href="{{ url('/auth/logout') }}">Logout</a>
+									<a href="{{ url('/auth/logout') }}">Salir</a>
 								</li>
 							</ul>
 						</li>
@@ -106,7 +106,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
-					<p>Copyright &copy; 2015 | <a href="http://www.findalltogether.com">Find All Together</a></p>
+					<p>Copyright &copy; 2017 | <a href="http://www.conmidoctor.com">Con Mi Doctor</a></p>
 				</div>
 			</div>
 		</div>

@@ -12,7 +12,7 @@ class UserController extends Controller {
 
 		/*
 	 * Display the posts of a particular user
-	 * 
+	 *
 	 * @param int $id
 	 * @return Response
 	 */
@@ -32,7 +32,7 @@ class UserController extends Controller {
 		$title = $user->name;
 		return view('home')->withPosts($posts)->withTitle($title);
 	}
-	
+
 	public function user_posts_draft(Request $request)
 	{
 		//
@@ -45,7 +45,7 @@ class UserController extends Controller {
 	/**
 	 * profile for user
 	 */
-	public function profile(Request $request, $id) 
+	public function profile(Request $request, $id)
 	{
 		$data['user'] = User::find($id);
 		if (!$data['user'])
@@ -62,6 +62,11 @@ class UserController extends Controller {
 		$data['posts_draft_count'] = $data['posts_count'] - $data['posts_active_count'];
 		$data['latest_posts'] = $data['user']->posts->where('active', 1)->take(5);
 		$data['latest_comments'] = $data['user']->comments->take(5);
+
+        $data['asofarma_count'] = $data['user']->where('pharmaceutical', 'Asofarma')->count();
+        $data['denkpharma_count'] = $data['user']->where('pharmaceutical', 'Denk Pharma')->count();
+        $data['rowe_count'] = $data['user']->where('pharmaceutical', 'Rowe')->count();
+
 		return view('admin.profile', $data);
 	}
 

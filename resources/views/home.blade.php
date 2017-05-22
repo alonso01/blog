@@ -7,7 +7,7 @@
 @section('content')
 
 @if ( !$posts->count() )
-There is no post till now. Login and write a new post now!!!
+No hay informacion registrada.
 @else
 <div class="">
 	@foreach( $posts as $post )
@@ -22,12 +22,12 @@ There is no post till now. Login and write a new post now!!!
 					@endif
 				@endif
 			</h3>
-			<p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></p>
+			<p> <!-- {{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a href="{{ url('/user/'.$post->author_id)}}">{{    $post->author->name }}</a>--></p> 
 			
 		</div>
 		<div class="list-group-item">
 			<article>
-				{!! str_limit($post->body, $limit = 1500, $end = '....... <a href='.url("/".$post->slug).'>Read More</a>') !!}
+				{!! str_limit($post->body, $limit = 1500, $end = '....... <a href='.url("/".$post->slug).'>Leer Mas</a>') !!}
 			</article>
 		</div>
 	</div>

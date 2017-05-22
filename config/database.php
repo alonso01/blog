@@ -54,10 +54,10 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', ''),
-			'username'  => env('DB_USERNAME', ''),
-			'password'  => env('DB_PASSWORD', ''),
+			'host'      => env('DB_HOST', '107.180.58.44'),
+			'database'  => env('DB_DATABASE', 'db_eowa_conmidoctor'),
+			'username'  => env('DB_USERNAME', 'i2418228_wp3'),
+			'password'  => env('DB_PASSWORD', 'A@ITGYeTmAHMthSA[I.74~#9'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
