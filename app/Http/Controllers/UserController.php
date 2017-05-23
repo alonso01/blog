@@ -66,6 +66,7 @@ class UserController extends Controller {
         $data['asofarma_count'] = $data['user']->where('pharmaceutical', 'Asofarma')->count();
         $data['denkpharma_count'] = $data['user']->where('pharmaceutical', 'Denk Pharma')->count();
         $data['rowe_count'] = $data['user']->where('pharmaceutical', 'Rowe')->count();
+        $data['is_admin'] = $request->user()->is_admin();
 
 		return view('admin.profile', $data);
 	}
