@@ -19,9 +19,9 @@ class UserController extends Controller {
 	public function user_posts($id)
 	{
 		//
-		$posts = Posts::where('author_id',$id)->where('active','1')->orderBy('created_at','desc')->paginate(5);
+		$posts = Posts::where('author_id',$id)->where('active','1')->orderBy('created_at','desc')->paginate(10);
 		$title = User::find($id)->name;
-		return view('home')->withPosts($posts)->withTitle($title);
+		return view('home')->withPosts($posts)->withTitle($title)->with('s', '');
 	}
 
 	public function user_posts_all(Request $request)
@@ -63,10 +63,21 @@ class UserController extends Controller {
 		$data['latest_posts'] = $data['user']->posts->where('active', 1)->take(5);
 		$data['latest_comments'] = $data['user']->comments->take(5);
 
-        $data['asofarma_count'] = $data['user']->where('pharmaceutical', 'Asofarma')->count();
-        $data['denkpharma_count'] = $data['user']->where('pharmaceutical', 'Denk Pharma')->count();
-        $data['rowe_count'] = $data['user']->where('pharmaceutical', 'Rowe')->count();
+        $data['asofarma_count'] = $data['user']->where('pharmaceutical', 'Asofarma')->where('role', 'subscriber')->count();
+        $data['denkpharma_count'] = $data['user']->where('pharmaceutical', 'Denk Pharma')->where('role', 'subscriber')->count();
+        $data['rowe_count'] = $data['user']->where('pharmaceutical', 'Rowe')->where('role', 'subscriber')->count();
         $data['is_admin'] = $request->user()->is_admin();
+		$data['is_pharmaceutical_manager'] = $request->user()->is_pharmaceutical_manager();
+		
+		if($request->user()->is_pharmaceutical_manager()){
+			$data['pharmaceutical_name'] = $request->user()->pharmaceutical;
+			$data['pharmaceutical_code'] = $request->user()->affiliate_code;			
+		}else if( $request->user()->is_admin()){
+			//@todo AUTOMATIZAR
+			$data['aso_pharmaceutical_code'] = \App\PharmaceuticalCompanies::find(1)->affiliate_code;
+			$data['denk_pharmaceutical_code'] = \App\PharmaceuticalCompanies::find(2)->affiliate_code;
+			$data['rowe_pharmaceutical_code'] = \App\PharmaceuticalCompanies::find(3)->affiliate_code;
+		}
 
 		return view('admin.profile', $data);
 	}

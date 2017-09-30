@@ -28,9 +28,9 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($s = '')
 	{
-		return redirect('/');
+		return redirect('/home');
 	}
 
 }

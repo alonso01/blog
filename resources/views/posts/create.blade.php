@@ -1,12 +1,13 @@
 @extends('app')
 
 @section('title')
-Add New Post
+Agregar Entrada
 @endsection
 
 @section('content')
 
 <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('/js/tinymce_4.6.4/js/tinymce/tinymce.min.js') }}"></script> --}}
 <script type="text/javascript">
 	tinymce.init({
 		selector : "textarea",
@@ -15,15 +16,27 @@ Add New Post
 	}); 
 </script>
 
-<form action="/new-post" method="post">
+<form action="/post/new" method="post">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="form-group">
 		<input required="required" value="{{ old('title') }}" placeholder="Enter title here" type="text" name = "title"class="form-control" />
 	</div>
 	<div class="form-group">
-		<textarea name='body'class="form-control">{{ old('body') }}</textarea>
+		<textarea name='body' class="form-control">{{ old('body') }}</textarea>
 	</div>
-	<input type="submit" name='publish' class="btn btn-success" value = "Publish"/>
-	<input type="submit" name='save' class="btn btn-default" value = "Save Draft" />
+	<div class="form-group">
+		<input type="text" name='tags' class="form-control" data-role="tagsinput" value="{{ old('tags') }}" />
+	</div>
+	<input type="submit" name='publish' class="btn btn-success" value = "Publicar"/>
+	<input type="submit" name='save' class="btn btn-default" value = "Guardar como Borrador" />
 </form>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.min.js') }}" ></script>
+@endpush
+
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css') }}" />
+@endpush

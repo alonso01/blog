@@ -4,7 +4,7 @@
 	@if($post)
 		{{ $post->title }}
 		@if(!Auth::guest() && ($post->author_id == Auth::user()->id || Auth::user()->is_admin()))
-			<button class="btn" style="float: right"><a href="{{ url('edit/'.$post->slug)}}">Edit Post</a></button>
+			<button class="btn" style="float: right"><a href="{{ url('edit/'.$post->slug)}}">Editar</a></button>
 		@endif
 	@else
 		Page does not exist
@@ -12,7 +12,7 @@
 @endsection
 
 @section('title-meta')
-<p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></p>
+<p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} Por <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></p>
 @endsection
 
 @section('content')
@@ -21,8 +21,16 @@
 	<div>
 		{!! $post->body !!}
 	</div>	
+	
+		@if($post->tags)
+		<div>
+			@foreach(explode(",",$post->tags) as $tag)
+				<span class="label label-primary">{{ $tag }}</span> &nbsp;
+			@endforeach
+			</div>
+		@endif
 	<div>
-		<h2>Leave a comment</h2>
+		<h2>Dejar un comentario</h2>
 	</div>
 	@if(Auth::guest())
 		<p>Login to Comment</p>
@@ -33,9 +41,9 @@
 				<input type="hidden" name="on_post" value="{{ $post->id }}">
 				<input type="hidden" name="slug" value="{{ $post->slug }}">
 				<div class="form-group">
-					<textarea required="required" placeholder="Enter comment here" name = "body" class="form-control"></textarea>
+					<textarea required="required" placeholder="Ingrese sus comentarios aquí" name = "body" class="form-control"></textarea>
 				</div>
-				<input type="submit" name='post_comment' class="btn btn-success" value = "Post"/>
+				<input type="submit" name='post_comment' class="btn btn-success" value = "Enviar"/>
 			</form>
 		</div>
 	@endif
@@ -58,6 +66,8 @@
 			@endforeach
 		</ul>
 		@endif
+
+
 	</div>
 @else
 404 error

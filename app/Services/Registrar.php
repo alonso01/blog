@@ -16,8 +16,12 @@ class Registrar implements RegistrarContract {
 	{
 		return Validator::make($data, [
 			'name' => 'required|max:255',
+			'doctor_code' => 'required|max:45|unique:users',			
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
+			'affiliate_code' => 'required|exists:pharmaceutical_companies,affiliate_code'
+		],[
+			'affiliate_code' => 'El código de afiliado no es válido, por favor verifique con su compañía farmacéutica el código que usted posee y vuelva a intentar.'
 		]);
 	}
 
@@ -33,6 +37,7 @@ class Registrar implements RegistrarContract {
 			'name' => $data['name'],
 			'email' => $data['email'],
             'pharmaceutical' => $data['pharmaceutical'],
+			'doctor_code' => $data['doctor_code'],			
 			'password' => bcrypt($data['password']),
 		]);
 	}

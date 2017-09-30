@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'pharmaceutical'];
+	protected $fillable = ['name', 'email', 'password', 'pharmaceutical', 'doctor_code', 'affiliate_code'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -62,4 +62,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 		return false;
 	}
+
+	public function is_pharmaceutical_manager()
+	{
+		$role = $this->role;
+		if($role == 'author')
+		{
+			return true;
+		}
+		return false;
+	}
+
 }

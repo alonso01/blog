@@ -9,14 +9,14 @@ trait AuthenticatesAndRegistersUsers {
 	/**
 	 * The Guard implementation.
 	 *
-	 * @var Guard
+	 * @var \Illuminate\Contracts\Auth\Guard
 	 */
 	protected $auth;
 
 	/**
 	 * The registrar implementation.
 	 *
-	 * @var Registrar
+	 * @var \Illuminate\Contracts\Auth\Registrar
 	 */
 	protected $registrar;
 
@@ -95,7 +95,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	protected function getFailedLoginMessage()
 	{
-		return 'These credentials do not match our records.';
+		return 'El usuario y clave ingresado no corresponde a ninguno de nuestros usuarios.';
 	}
 
 	/**
@@ -107,7 +107,7 @@ trait AuthenticatesAndRegistersUsers {
 	{
 		$this->auth->logout();
 
-		return redirect('/');
+		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
 	}
 
 	/**

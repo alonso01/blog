@@ -1,11 +1,14 @@
 @extends('app')
 
 @section('title')
-Edit Post
+Editar Entrada
 @endsection
 
 @section('content')
 <script type="text/javascript" src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
+{{-- 
+<script type="text/javascript" src="{{ asset('/js/tinymce_4.6.4/js/tinymce/tinymce.min.js') }}"></script> --}}
+{{-- <script type="text/javascript" src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=p5lsh03g8jbufa6ji3p5nhbmlx6aibry863cfg51xhm6cvo7"></script> --}}
 <script type="text/javascript">
 	tinymce.init({
 		selector : "textarea",
@@ -21,12 +24,16 @@ Edit Post
 		<input required="required" placeholder="Enter title here" type="text" name = "title" class="form-control" value="@if(!old('title')){{$post->title}}@endif{{ old('title') }}"/>
 	</div>
 	<div class="form-group">
-		<textarea name='body'class="form-control">
+		<textarea name='body' class="form-control">
 			@if(!old('body'))
 			{!! $post->body !!}
 			@endif
 			{!! old('body') !!}
 		</textarea>
+	</div>
+	<div class="form-group">
+			<p>Tags</p>
+			<input type="text" name='tags' class="form-control" data-role="tagsinput" value="@if(!old('tags')){{$post->tags}}@endif{{ old('tags') }}" />
 	</div>
 	@if($post->active == '1')
 	<input type="submit" name='publish' class="btn btn-success" value = "Update"/>
@@ -37,3 +44,12 @@ Edit Post
 	<a href="{{  url('delete/'.$post->id.'?_token='.csrf_token()) }}" class="btn btn-danger">Delete</a>
 </form>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.min.js') }}" ></script>
+@endpush
+
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css') }}" />
+@endpush
